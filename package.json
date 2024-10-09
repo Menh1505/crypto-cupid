@@ -1,0 +1,8 @@
+{
+  "name": "crypto-cupid",
+  "version": "1.0.0",
+  "scripts": {
+    "install": "cd server && bun install && cd ../client && bun install",
+    "start": "cd server && bun run start && cd ../client && bun run start"
+  }
+}
