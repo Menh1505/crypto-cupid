@@ -1,59 +1,23 @@
 import express from 'express';
-import mongoose from 'mongoose';
-import passport from 'passport';
-import session from 'express-session';
-import './config/passport-setup';
-
-require('dotenv').config();
+import userRoutes from './routes/UserRoutes';
+import swipeRoutes from './routes/SwipeRoutes';
+import matchRoutes from './routes/MatchRoutes';
+import messageRoutes from './routes/MessageRoutes';
+import blockRoutes from './routes/BlockRoutes';
+import reportRoutes from './routes/ReportRoutes';
 
 const app = express();
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI as string, {});
+app.use(express.json());
 
-// Middleware
-/* app.use(
-    session({
-        secret: 'your_secret_key',
-        resave: false,
-        saveUninitialized: true,
-    })
-);
-app.use(passport.initialize());
-app.use(passport.session());
+app.use('/users', userRoutes);
+app.use('/swipes', swipeRoutes);
+app.use('/matches', matchRoutes);
+app.use('/messages', messageRoutes);
+app.use('/blocks', blockRoutes);
+app.use('/reports', reportRoutes);
 
-// Auth Routes
-app.get(
-    '/auth/google',
-    passport.authenticate('google', {
-        scope: ['profile', 'email'],
-    })
-);
-
-app.get(
-    '/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: '/' }),
-    (req: express.Request, res: express.Response) => {
-        res.redirect('/dashboard');
-    }
-);
-
-app.get('/logout', (req: express.Request, res: express.Response) => {
-    req.logout((err: any) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        res.redirect('/');
-    });
-});
-
-app.get('/dashboard', (req: express.Request, res: express.Response) => {
-    if (!req.isAuthenticated()) {
-        return res.redirect('/');
-    }
-    res.send(`Hello ${(req.user as any).username}`);
-}); */
-
-app.listen(5000, () => {
-    console.log('Server is running on port 5000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
