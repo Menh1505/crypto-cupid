@@ -4,10 +4,12 @@ import passport from 'passport';
 import session from 'express-session';
 import './config/passport-setup';
 
+require('dotenv').config();
+
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/dating-app', {});
+mongoose.connect(process.env.MONGO_URI as string, {});
 
 // Middleware
 /* app.use(
