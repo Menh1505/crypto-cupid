@@ -1,38 +1,40 @@
 import passport from 'passport';
-// import GoogleStrategy from 'passport-google-oauth20';
-import mongoose from 'mongoose';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import User from '../models/User';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-var GoogleStrategy = require('passport-google-oauth20').Strategy;
 passport.use(
     new GoogleStrategy(
         {
-            clientID: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            clientID: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
             callbackURL: '/auth/google/callback',
         },
-        function (accessToken: any, refreshToken: any, profile: any, cb: any) {
-            /* try {
+        async (accessToken, refreshToken, profile, done) => {
+            try {
                 let user = await User.findOne({ googleId: profile.id });
                 if (!user) {
                     user = await new User({
                         googleId: profile.id,
-                        username: profile.displayName,
-                        thumbnail: profile._json.picture,
+                        name: profile.displayName,
+                        profile_photo: profile._json.picture,
                     }).save();
                 }
                 done(null, user);
             } catch (err) {
-                done(err, null);
-            } */
+                if (err instanceof Error) {
+                    done(err, null);
+                } else {
+                    done(new Error('An unknown error occurred'), null);
+                }
+            }
         }
     )
 );
 
-/* passport.serializeUser((user, done) => {
+passport.serializeUser((user: any, done) => {
     done(null, user.id);
 });
 
@@ -40,4 +42,4 @@ passport.deserializeUser((id, done) => {
     User.findById(id).then((user) => {
         done(null, user);
     });
-}); */
+});
