@@ -25,9 +25,9 @@ passport.use(
                 done(null, user);
             } catch (err) {
                 if (err instanceof Error) {
-                    done(err, null);
+                    done(err, undefined);
                 } else {
-                    done(new Error('An unknown error occurred'), null);
+                    done(new Error('An unknown error occurred'), undefined);
                 }
             }
         }
