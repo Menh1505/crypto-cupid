@@ -13,6 +13,15 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
     res.redirect('/dashboard');
 });
 
+// Check if the user is authenticated
+router.get('/check', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.json({ isAuthenticated: true });
+    } else {
+        res.json({ isAuthenticated: false });
+    }
+});
+
 // Logout route
 router.get('/logout', (req, res) => {
     req.logout((err) => {
