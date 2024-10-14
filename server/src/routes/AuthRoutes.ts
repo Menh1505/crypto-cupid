@@ -5,6 +5,7 @@ const router = express.Router();
 
 // Initiate Google authentication
 router.get('/google', passport.authenticate('google', {
+    // console.log('login with google');
     scope: ['profile', 'email']
 }));
 
