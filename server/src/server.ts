@@ -1,6 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
+import cors from 'cors';
 import './config/passport-setup'; // Ensure this is imported to configure passport
 import userRoutes from './routes/UserRoutes';
 import swipeRoutes from './routes/SwipeRoutes';
@@ -26,7 +27,10 @@ connectDB();
 const app = express();
 
 app.use(express.json());
-
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+}));
 // Session management
 app.use(session({
     secret: process.env.SESSION_SECRET as string || 'default_secret_key',

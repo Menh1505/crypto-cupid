@@ -23,7 +23,6 @@ passport.use(
                         profile_photo: profile._json?.picture,
                     }).save();
                 }
-                console.log('saved user', user);
                 done(null, user);
             } catch (err) {
                 if (err instanceof Error) {

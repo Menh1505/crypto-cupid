@@ -12,16 +12,12 @@ router.get('/google', passport.authenticate('google', {
 // Handle callback after Google has authenticated the user
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
     // Successful authentication, redirect to client
-    res.redirect('http://localhost:3001/'); // Change to your client URL
+    res.redirect('http://localhost:3000/'); // Change to your client URL
 });
 
 // Check if the user is authenticated
 router.get('/check', (req, res) => {
-    if (req.isAuthenticated()) {
-        res.json({ isAuthenticated: true });
-    } else {
-        res.json({ isAuthenticated: false });
-    }
+    res.send(req.user);
 });
 
 // Logout route
@@ -30,7 +26,7 @@ router.get('/logout', (req, res) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
-        res.redirect('http://localhost:3001/');
+        res.redirect('http://localhost:3000/');
     });
 });
 
