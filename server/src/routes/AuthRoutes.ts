@@ -11,7 +11,7 @@ router.get('/google', passport.authenticate('google', {
 
 // Handle callback after Google has authenticated the user
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
-    res.redirect('/dashboard');
+    res.redirect('/');
 });
 
 // Check if the user is authenticated

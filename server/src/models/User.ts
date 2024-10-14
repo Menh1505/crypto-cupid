@@ -20,7 +20,6 @@ export interface ILocation {
 }
 
 export interface IUser extends Document {
-    email: string;
     googleId?: string;
     facebookId?: string;
     password_hash?: string;
@@ -56,18 +55,17 @@ const LocationSchema = {
 
 const UserSchema = new Schema<IUser>(
     {
-        email: { type: String, required: true, unique: true },
         googleId: { type: String, unique: true },
         facebookId: { type: String, unique: true },
-        password_hash: { type: String, required: true },
-        name: { type: String, required: true },
-        birthdate: { type: Date, required: true },
-        gender: { type: String, required: true },
-        profile_photo: { type: String },
-        bio: { type: String },
-        preferences: { type: PreferencesSchema, required: true },
+        password_hash: { type: String, required: false },
+        name: { type: String, required: false },
+        birthdate: { type: Date, required: false },
+        gender: { type: String, required: false },
+        profile_photo: { type: String, required: false },
+        bio: { type: String, required: false },
+        preferences: { type: PreferencesSchema, required: false },
         photos: { type: [PhotoSchema], default: [] },
-        location: { type: LocationSchema },
+        location: { type: LocationSchema, required: false },
     },
     {
         timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
