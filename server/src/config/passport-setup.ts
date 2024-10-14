@@ -19,9 +19,11 @@ passport.use(
                     user = await new User({
                         googleId: profile.id,
                         name: profile.displayName,
-                        profile_photo: profile._json.picture,
+                        email: profile.emails?.[0]?.value,
+                        profile_photo: profile._json?.picture,
                     }).save();
                 }
+                console.log('saved user', user);
                 done(null, user);
             } catch (err) {
                 if (err instanceof Error) {

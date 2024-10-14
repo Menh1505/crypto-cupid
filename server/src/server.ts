@@ -13,8 +13,16 @@ import mongoose from 'mongoose';
 
 require('dotenv').config();
 
-mongoose.connect(process.env.MONGO_URI as string);
-
+const connectDB = async () => {
+    try {
+        await mongoose.connect('mongodb://localhost:27017/dating-app');
+        console.log('MongoDB connected successfully');
+    } catch (error) {
+        console.error('MongoDB connection error:', error);
+        process.exit(1);
+    }
+};
+connectDB();
 const app = express();
 
 app.use(express.json());
