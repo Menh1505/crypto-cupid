@@ -24,14 +24,14 @@ export interface IUser extends Document {
     googleId?: string;
     facebookId?: string;
     password_hash?: string;
-    name: string;
-    birthdate: Date;
-    gender: string;
+    name?: string;
+    birthdate?: Date;
+    gender?: string;
     profile_photo?: string;
     bio?: string;
-    created_at: Date;
-    updated_at: Date;
-    preferences: IPreferences;
+    created_at?: Date;
+    updated_at?: Date;
+    preferences?: IPreferences;
     photos?: IPhoto[];
     location?: ILocation;
 }
