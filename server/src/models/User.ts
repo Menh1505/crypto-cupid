@@ -32,7 +32,7 @@ export interface IUser extends Document {
     updated_at?: Date;
     preferences?: IPreferences;
     photos?: IPhoto[];
-    location?: ILocation;
+    location?: string;
 }
 
 const PreferencesSchema = {
@@ -65,7 +65,7 @@ const UserSchema = new Schema<IUser>(
         bio: { type: String, required: false },
         preferences: { type: PreferencesSchema, required: false },
         photos: { type: [PhotoSchema], default: [] },
-        location: { type: LocationSchema, required: false },
+        location: { type: String, required: false },
     },
     {
         timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
