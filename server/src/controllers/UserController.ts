@@ -16,10 +16,10 @@ export const createUser = async (req: Request, res: Response) => {
     }
 };
 
-// Get a user by ID
-export const getUserById = async (req: Request, res: Response) => {
+// Get a user by Google ID
+export const getUserByGoogleId = async (req: Request, res: Response) => {
     try {
-        const user = await User.findById(req.params.id);
+        const user = await User.findOne({ googleId: req.params.googleId });
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
@@ -33,10 +33,10 @@ export const getUserById = async (req: Request, res: Response) => {
     }
 };
 
-// Update a user by ID
-export const updateUserById = async (req: Request, res: Response) => {
+// Update a user by Google ID
+export const updateUserByGoogleId = async (req: Request, res: Response) => {
     try {
-        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        const user = await User.findOneAndUpdate({ googleId: req.params.googleId }, req.body, { new: true, runValidators: true });
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
@@ -50,10 +50,10 @@ export const updateUserById = async (req: Request, res: Response) => {
     }
 };
 
-// Delete a user by ID
-export const deleteUserById = async (req: Request, res: Response) => {
+// Delete a user by Google ID
+export const deleteUserByGoogleId = async (req: Request, res: Response) => {
     try {
-        const user = await User.findByIdAndDelete(req.params.id);
+        const user = await User.findOneAndDelete({ googleId: req.params.googleId });
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
