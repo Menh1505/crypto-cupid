@@ -1,9 +1,9 @@
 import express from 'express';
 import {
     createUser,
-    getUserById,
-    updateUserById,
-    deleteUserById,
+    getUserByGoogleId,
+    updateUserByGoogleId,
+    deleteUserByGoogleId,
     listUsers
 } from '../controllers/UserController';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
@@ -14,13 +14,13 @@ const router = express.Router();
 router.post('/', createUser);
 
 // Route to get a user by ID
-router.get('/:id', getUserById);
+router.get('/:id', getUserByGoogleId);
 
 // Route to update a user by ID
-router.put('/:id', updateUserById);
+router.put('/:id', updateUserByGoogleId);
 
 // Route to delete a user by ID
-router.delete('/:id', deleteUserById);
+router.delete('/:id', deleteUserByGoogleId);
 
 // Route to list all users
 router.get('/', listUsers);
