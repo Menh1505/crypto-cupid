@@ -1,4 +1,4 @@
-import { Schema, model, Document, Types } from 'mongoose';
+import mongoose, { Schema, model, Document, Types } from 'mongoose';
 
 export interface IMatch extends Document {
     user1_id: Types.ObjectId;
@@ -20,6 +20,6 @@ MatchSchema.index({ user2_id: 1 });
 // To prevent duplicate matches between the same users
 MatchSchema.index({ user1_id: 1, user2_id: 1 }, { unique: true });
 
-const Match = model<IMatch>('Match', MatchSchema);
+const Match = mongoose.model<IMatch>('Match', MatchSchema);
 
 export default Match;

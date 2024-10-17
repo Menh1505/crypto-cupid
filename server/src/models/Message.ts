@@ -1,4 +1,4 @@
-import { Schema, model, Document, Types } from 'mongoose';
+import mongoose, { Schema, model, Document, Types } from 'mongoose';
 import Match from './Match';
 
 export interface IMessage extends Document {
@@ -52,6 +52,6 @@ MessageSchema.pre<IMessage>('save', async function (next) {
     next();
 });
 
-const Message = model<IMessage>('Message', MessageSchema);
+const Message = mongoose.model<IMessage>('Message', MessageSchema);
 
 export default Message;

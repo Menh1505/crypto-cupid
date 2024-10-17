@@ -1,5 +1,5 @@
 // src/models/User.ts
-import { Schema, model, Document } from 'mongoose';
+import mongoose, { Schema, model, Document } from 'mongoose';
 
 export interface IPreferences {
     preferred_gender: string;
@@ -72,6 +72,6 @@ const UserSchema = new Schema<IUser>(
     }
 );
 
-const User = model<IUser>('User', UserSchema);
+const User = mongoose.model<IUser>('User', UserSchema);
 
 export default User;

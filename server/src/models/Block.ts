@@ -1,4 +1,4 @@
-import { Schema, model, Document, Types } from 'mongoose';
+import mongoose, { Schema, model, Document, Types } from 'mongoose';
 
 export interface IBlock extends Document {
     blockerId: Types.ObjectId;
@@ -27,6 +27,6 @@ BlockSchema.pre<IBlock>('save', function (next) {
     next();
 });
 
-const Block = model<IBlock>('Block', BlockSchema);
+const Block = mongoose.model<IBlock>('Block', BlockSchema);
 
 export default Block;

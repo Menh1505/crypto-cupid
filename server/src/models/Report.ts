@@ -1,5 +1,5 @@
 // src/models/Report.ts
-import { Schema, model, Document, Types } from 'mongoose';
+import mongoose, { Schema, model, Document, Types } from 'mongoose';
 
 export interface IReport extends Document {
   reporterId: Types.ObjectId;
@@ -32,6 +32,6 @@ ReportSchema.pre<IReport>('save', function (next) {
   next();
 });
 
-const Report = model<IReport>('Report', ReportSchema);
+const Report = mongoose.model<IReport>('Report', ReportSchema);
 
 export default Report;

@@ -1,4 +1,4 @@
-import { Schema, model, Document, Types } from 'mongoose';
+import mongoose, { Schema, model, Document, Types } from 'mongoose';
 
 export interface ISwipe extends Document {
     swiper_id: Types.ObjectId;
@@ -25,6 +25,6 @@ SwipeSchema.pre<ISwipe>('save', function (next) {
     next();
 });
 
-const Swipe = model<ISwipe>('Swipe', SwipeSchema);
+const Swipe = mongoose.model<ISwipe>('Swipe', SwipeSchema);
 
 export default Swipe;
