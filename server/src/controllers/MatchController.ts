@@ -23,7 +23,7 @@ export const getMatchesForUser = async (req: Request, res: Response) => {
         const userId = req.params.userId;
         const matches = await Match.find({
             $or: [{ user1_id: userId }, { user2_id: userId }]
-        });
+        }).populate('user1_id user2_id');
         res.json(matches);
     } catch (error) {
         if (error instanceof Error) {
